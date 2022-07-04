@@ -3,9 +3,18 @@
 <head>
     <title>Trees by Devin Gray</title>
     <meta charset="UTF-8">
+    <style>
+        div {
+            text-align: center;
+            font-size: xx-small;
+        }
+    </style>
 </head>
 <body>
-<canvas id="my_canvas" width="1000" height="800"></canvas>
+<div>
+    <a href="https://sleddog.github.io/trees/">Trees by Devin Gray</a> - open source at <a href="https://github.com/sleddog/trees">https://github.com/sleddog/trees</a><br />
+    <canvas id="tree_canvas" width="800" height="800"></canvas>
+</div>
 <script>
     function randColor() {
         const colors = [
@@ -609,8 +618,8 @@
         return color;
     }
 
-    const myCanvas = document.getElementById("my_canvas");
-    const ctx = myCanvas.getContext("2d");
+    const treeCanvas = document.getElementById("tree_canvas");
+    const ctx = treeCanvas.getContext("2d");
 
     const brownColor = "#43302E";
     const greenColor = "#254117";
@@ -636,12 +645,13 @@
 
         if (len < 10) {
             ctx.restore();
+
+            // draw a "leaf"
+            drawLeaf(startX, startY);
             return;
         }
-        // draw a "leaf"
-        drawLeaf(startX, startY);
 
-        // now create branches (recursive call)
+        // now create branches (recursive calls)
         draw(0, -len, len * 0.8, angle - 15, branchWidth * 0.8);
         draw(0, -len, len * 0.8, angle + 15, branchWidth * 0.8);
 
@@ -652,7 +662,7 @@
         ctx.beginPath();
         ctx.strokeStyle = greenColor;
         ctx.fillStyle = greenColor;
-        ctx.ellipse(x, y, 4, 7, Math.PI / 4, 0, 2 * Math.PI);
+        ctx.ellipse(x, y-10, 4, 11, Math.PI / 4+15, 0, 2 * Math.PI);
         ctx.fill();
     }
 
